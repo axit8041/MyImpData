@@ -1,0 +1,21 @@
+" Checking white spce at the end of line
+match Todo /\s\+$/
+
+" Auto indenting on Next Line
+set autoindent
+
+" Setting VIM basic color to desert theme
+color desert
+
+" Setting 80 lines color column
+set cc=80
+
+" Enable Line Number
+set number
+
+" Highlight Matching Brackets
+set showmatch
+
+" Search Words with Ignore Case
+set ic
+
