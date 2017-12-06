@@ -1,0 +1,85 @@
+General Information
+===================
+- limits.h contains macro __WORDSIZE represents wordsize of processor in Bits.
+- int8_t, int16_t etc "Strongly Sized Datatype" resides in stdint.h header file.
+- Same way INT8_MAX, INT8_MIN etc "Strongly Sized Datatype" maximum and minimum
+  value are also stored in stdint.h header files
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Structure Padding
+=================
+
+Structure Padding in 32-Bit Machine
+===================================
+Word Size: 32-Bit or 4-Bytes
+
+	int32_t abc; //4 Bytes
+	char a; //1 Byte
+	int32_t abc1; //4 Bytes
+	char b; //1 Byte
+	Total Size of Structure is 16 Bytes
+
+	char a; //1 Byte
+	char b; //1 Byte
+	int32_t abc; //4 Bytes
+	int32_t abc1; //4 Bytes
+	Total Size of Structure is 12 Bytes
+
+Strcuture Padding in 64-Bit Machine
+===================================
+Word Size: 64-Bit or 8-Bytes
+
+General Rule of Structure Padding in 64-Bit Machine is,
+	Align variable on its Size
+	32-bit variables are aligned on 4 bytes, 64-bit variables on 8 bytes
+
+	int32_t abc; //4 Bytes
+	char a; //1 Byte
+	int32_t abc1; //4 Bytes
+	char b; //1 Byte
+	Total Size of Structure is 16 Bytes
+
+	int32_t	abc; //4-Bytes
+	int32_t abc1; //4-Bytes
+	int32_t abc2; //4-Bytes
+	int64_t abc3; //8-Bytes
+	Total size pf Strcuture is 24-Bytes, 4-Bytes padding between abc2 and abc3
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Good Simple Makefile Example
+============================
+
+CC = gcc
+CFLAGS = -Wall
+MKDIR_P = mkdir -p
+OBJ_DIR = obj
+SRC_DIR = src
+APP_DIR = app
+INC_DIR = include
+
+# Getting All Source *.c file in SRC variable
+SRC = $(wildcard src/*.c)
+
+# Replacing src/*.c to obj/*.o in OBJ variable
+OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
+
+# $@ = Matches the Target, anyfile.o
+# $< = Matches the Dependency, anyfile.c
+# $^ = All Files present at Dependency with Space Seperated Format
+
+all: $(OBJ) $(APP_DIR)/application
+
+# Target : Dependency
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(MKDIR_P) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
+
+$(APP_DIR)/application: $(OBJ)
+	$(MKDIR_P) $(APP_DIR)
+	$(CC) $(CFLAGS) -o $@ $^
+
+clean:
+	rm -rf $(APP_DIR)
+	rm -rf $(OBJ_DIR)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
