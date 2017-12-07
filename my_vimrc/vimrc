@@ -11,7 +11,7 @@ color desert
 set cc=80
 
 " Enable Line Number
-set number
+" set number
 
 " Highlight Matching Brackets
 set showmatch
@@ -19,3 +19,9 @@ set showmatch
 " Search Words with Ignore Case
 set ic
 
+" Graphical Menu to cycle through the names of files inside VIM
+set wildmenu
+
+" Search as Character is inserted
+set incsearch
+set hlsearch
