@@ -23,6 +23,15 @@ GIT Commands
   	For Example, git push origin master
   git push -f origin master
 
+- Resetting Hard the branch you are on
+  git reset --hard <commit-id>
+
+- Creating Patches from branch you are on
+  git format-patch -2
+  git format-patch -2 --cover-letter, generates cover letter with 2 patch information
+
+
+
 
 GIT Branching Commands
 ======================
