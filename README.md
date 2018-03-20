@@ -21,3 +21,5 @@ Change BY Master
 Adding Something By Branch called "new_branch"
 Added Somethig by "new_branch"
 Added something by master
+
+Added Something in "my_new"
